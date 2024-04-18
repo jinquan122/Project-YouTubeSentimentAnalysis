@@ -21,9 +21,10 @@ class LanceDBsearchTool(BaseTool):
         return str(nodes_text)
 
 class InDepthDiscussion():
-    def __init__(self, query:str):
+    def __init__(self, query:str, product:str):
         self.llm = get_langchain_llm()
         self.query = query
+        self.product = product
 
     def _search_tool(self):
         '''
@@ -76,14 +77,14 @@ class InDepthDiscussion():
             Task: The tasks for the task: query research and enhanced research.
         '''
         query_research = Task(
-            description=f'Perform a research on the given query to find reason or terminology behind based on reviews in LanceDB and extra information. Query: {self.query}',
+            description=f'Perform a research on the given query to find reason or terminology behind based on reviews in LanceDB and extra information. Target subject is {self.product}. Query: {self.query}',
             expected_output=f'A comprehensive analysis.',
             agent=researcher,
             tools=[sentiment_search_tool, search_tool]
         )
 
         enhanced_research = Task(
-            description=f'Perform sencond level of research on the analysis done by researcher based on given query. Query: {self.query}',
+            description=f'Perform sencond level of research on the analysis done by researcher based on given query. Target subject is {self.product}. Query: {self.query}',
             expected_output=f'A comprehensive enhanced analysis.',
             agent=senior_researcher,
             tool=[search_tool]

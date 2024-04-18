@@ -7,7 +7,7 @@ def main():
     input = st.text_input("Enter a query...")
     if input:
         with st.spinner("Running analysis..."):
-            indepth_discussion = InDepthDiscussion(input)
+            indepth_discussion = InDepthDiscussion(input, st.session_state['subject'])
             analysis_result = indepth_discussion.run()
             st.write(analysis_result)
 
