@@ -1,5 +1,6 @@
 # credential
 OAI_CONFIG_LIST
+credential.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
